@@ -50,7 +50,7 @@ const Home = () => {
                 }
                 setLoading(false); // End loading
             }).catch((error) => {
-                console.log(error.message);
+        
                 SetApiData([]); 
                 setLoading(false); // end loading 
             })
@@ -76,7 +76,6 @@ const Home = () => {
     // search data
     const handleSearch = (data) => {
         setSearchText(data)
-        console.log(searchText)
     }
 
 
@@ -178,7 +177,7 @@ const Home = () => {
                                         <div className="card-body">
                                             <a href={data.url} className="card-title">{title_limit(data.title)}</a>
                                             <p className="card-text">{description_limit(data.description)}</p>
-                                            <a id='view_news' href={data.url} className="btn btn-primary btn-sm" target='_blank'><FontAwesomeIcon icon="fa-regular fa-eye" /> View</a>
+                                            <a id='view_news' href={data.url} className="btn btn-primary btn-sm" target='_blank'> View</a>
                                         </div>
                                     </div>
                                 </div>
