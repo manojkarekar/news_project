@@ -14,7 +14,7 @@ const Home = () => {
     const [searchText, setSearchText] = useState("");
 
     const [showScrollToTop, setShowScrollToTop] = useState(false);
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
     // set category function 
     const handleCategoryChange = (newCategory) => {
@@ -27,7 +27,7 @@ const Home = () => {
 
     // Yesterday date
     let today = new Date();
-    today.setDate(today.getDate()-1)
+    today.setDate(today.getDate() - 1)
 
     let Yesterday = today.toISOString().split('T')[0];
 
@@ -37,18 +37,21 @@ const Home = () => {
             then((response) => {
                 return response.json();
             }).then((data) => {
-
-                const validArticles = data.articles.filter(
-                    (article) =>
-                        article.urlToImage &&
-                        article.urlToImage.startsWith('https') &&
-                        /\.(jpg|jpeg|png)$/i.test(article.urlToImage) // Ensure image URL ends with .jpg, .jpeg, or .png
-                );
-                SetApiData(validArticles);
-                setLoading(false); // end loading
-
+                if (data && Array.isArray(data.articles)) {
+                    const validArticles = data.articles.filter(
+                        (article) =>
+                            article.urlToImage &&
+                            article.urlToImage.startsWith('https') &&
+                            /\.(jpg|jpeg|png)$/i.test(article.urlToImage) // Ensure image URL ends with .jpg, .jpeg, or .png
+                    );
+                    SetApiData(validArticles);
+                } else {
+                    SetApiData([]);
+                }
+                setLoading(false); // End loading
             }).catch((error) => {
                 console.log(error.message);
+                SetApiData([]); 
                 setLoading(false); // end loading 
             })
     }, [category, searchText]);
@@ -149,58 +152,58 @@ const Home = () => {
 
 
             <div className="container">
-            {loading ? (
-                <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
-                    <img src="https://i.gifer.com/YCZH.gif" alt="Loading..." /> {/* Replace with your loader image URL */}
-                </div>
-            ) : (
-                <div className="row my-5" >
+                {loading ? (
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
+                        <img src="https://i.gifer.com/YCZH.gif" alt="Loading..." /> {/* Replace with your loader image URL */}
+                    </div>
+                ) : (
+                    <div className="row my-5" >
 
-                    {ApiData.map((data) => {
-                        // const imageUrl = data.urlToImage && data.urlToImage.startsWith('http') ? data.urlToImage : 'https://via.placeholder.com/150';
+                        {ApiData.map((data) => {
+                            // const imageUrl = data.urlToImage && data.urlToImage.startsWith('http') ? data.urlToImage : 'https://via.placeholder.com/150';
 
-                        return (
+                            return (
 
-                            <div id='news_container' className="d-flex col-12 col-md-6 col-xl-3 my-4 justify-content-center">
-                                <div className="card" style={{ width: '18rem', height: "450px" }}>
-                                    {data.urlToImage && /\.(jpg|jpeg|png)$/i.test(data.urlToImage) ? (
-                                        <img src={data.urlToImage} className="card-img-top img-fluid img-height" alt={data.source.name} />
-                                    ) : (
-                                        <img src="https://via.placeholder.com/150" className="card-img-top img-fluid img-height" alt="placeholder" />
-                                    )}
+                                <div id='news_container' className="d-flex col-12 col-md-6 col-xl-3 my-4 justify-content-center">
+                                    <div className="card" style={{ width: '18rem', height: "450px" }}>
+                                        {data.urlToImage && /\.(jpg|jpeg|png)$/i.test(data.urlToImage) ? (
+                                            <img src={data.urlToImage} className="card-img-top img-fluid img-height" alt={data.source.name} />
+                                        ) : (
+                                            <img src="https://via.placeholder.com/150" className="card-img-top img-fluid img-height" alt="placeholder" />
+                                        )}
 
 
 
-                                    {/* <img src={data.urlToImage} className="card-img-top img-fluid img-height" alt={data.source.name} /> */}
-                                    <div className="card-body">
-                                        <a href={data.url} className="card-title">{title_limit(data.title)}</a>
-                                        <p className="card-text">{description_limit(data.description)}</p>
-                                        <a id='view_news' href={data.url} className="btn btn-primary btn-sm" target='_blank'><FontAwesomeIcon icon="fa-regular fa-eye" /> View</a>
+                                        {/* <img src={data.urlToImage} className="card-img-top img-fluid img-height" alt={data.source.name} /> */}
+                                        <div className="card-body">
+                                            <a href={data.url} className="card-title">{title_limit(data.title)}</a>
+                                            <p className="card-text">{description_limit(data.description)}</p>
+                                            <a id='view_news' href={data.url} className="btn btn-primary btn-sm" target='_blank'><FontAwesomeIcon icon="fa-regular fa-eye" /> View</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        )
-                    })}
-                </div>
-                  )}
+                            )
+                        })}
+                    </div>
+                )}
             </div>
-      
+
             <Footer />
-            <button 
-                    className="btn btn-primary scroll-to-top" 
-                    onClick={scrollToTop} 
-                    style={{
-                        position: 'fixed', 
-                        bottom: '30px', 
-                        right: '30px', 
-                        borderRadius: '50%', 
-                        zIndex: 1000, 
-                        display: showScrollToTop ? 'block' : 'none'
-                    }}
-                >
-                    ↑
-                </button>
+            <button
+                className="btn btn-primary scroll-to-top"
+                onClick={scrollToTop}
+                style={{
+                    position: 'fixed',
+                    bottom: '30px',
+                    right: '30px',
+                    borderRadius: '50%',
+                    zIndex: 1000,
+                    display: showScrollToTop ? 'block' : 'none'
+                }}
+            >
+                ↑
+            </button>
         </div>
     )
 }
