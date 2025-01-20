@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.img-height {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Custom styles to enhance responsiveness */
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 150px;
+  }
+}
+
+footer {
+  background-color: #f8f9fa;
+}
+
+.row {
+  width: 100%;
+  align-content: center;
+}
+
+
+
+#view_news {
+  position: absolute;
+  right: 10%;
+  top: 350px;
+}
+
+
+/* navbar style */
+
+#navbar_container {
+  position: sticky;
+  top: 0%;
+  z-index: 999;
+}
+#search {
+  width: 100%;
+  max-width: 550px; 
+  margin: 0 auto;
+}
+
+#search input {
+  width: 100%;
+}
+
+#navbar_container .container-fluid   a{
+  font-size:20px;
+  color: black;
+}
+
+.container-fluid a span{
+  color: red;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+
+
+
+
+/* card hover effect */
+.card:hover{
+  box-shadow: 0.1px 0.1px  20px rgb(89, 178, 252);
+  transition: 0.5s;
+}
+
+/* footer style */
+#footer {
+  width: 100%;
+  height: 300px;
+}
+
+
+
+/* scroll button design */
+/* .scroll-to-top {
+  font-size: 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top:hover {
+  background-color: #0056b3;
+} */
+
+
+
+
+#news_container{
+  display: flex;
+
+} 
+
+@media screen and (max-width:550px) {
+  #navbar_container .container-fluid   a{
+    font-size:18px;
+    color: black;
+  }
+  
+  .container-fluid a span{
+    color: red;
+    font-size: 35px;
+    font-weight: bold;
+  }
+}
+
+
+.btn-primary:hover{
+  box-shadow: 0.1px 0.1px 6px rgb(118, 118, 241);
+}
+
+
