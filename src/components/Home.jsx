@@ -9,6 +9,8 @@ const Home = () => {
     let API_KEY = import.meta.env.VITE_API_KEY;
     let API_URL = import.meta.env.VITE_API_URL;
 
+    console.log(API_URL);
+
     const [ApiData, SetApiData] = useState([]);
     const [category, SetCategory] = useState('');
 
