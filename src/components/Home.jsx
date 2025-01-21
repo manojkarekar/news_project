@@ -36,9 +36,16 @@ const Home = () => {
 
     useEffect(() => {
         setLoading(true); // Start loading
-    
-        fetch(`${API_URL}?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`).
-        // fetch(`https://newsapi.org/v2/everything?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`).
+
+        fetch(`${API_URL}?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Upgrade-Insecure-Requests': '1',
+            }
+        }).
+            // fetch(`https://newsapi.org/v2/everything?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`).
+
             then((response) => {
                 return response.json();
             }).then((data) => {

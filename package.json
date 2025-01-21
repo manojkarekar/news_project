@@ -1,6 +1,6 @@
 {
-  "name": "react-news-api",
-  "homepage": "https://manojkarekar.com/news_project",
+  "name": "news_project",
+  "homepage": "https://github.com/manojkarekar/news_project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
