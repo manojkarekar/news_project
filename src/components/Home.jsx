@@ -37,7 +37,10 @@ const Home = () => {
     useEffect(() => {
         setLoading(true); // Start loading
 
-        fetch(`${API_URL}?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`, {
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/'; // CORS Proxy URL
+        const targetUrl = `${API_URL}?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`;
+    
+        fetch(`${proxyUrl}${targetUrl}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
