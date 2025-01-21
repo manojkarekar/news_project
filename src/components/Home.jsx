@@ -6,7 +6,10 @@ import Footer from './Footer';
 
 const Home = () => {
 
-    let API_KEY = import.meta.env.VITE_API_KEY;
+    // let API_KEY = import.meta.env.VITE_API_KEY;
+    const API_URL = process.env.REACT_APP_API_URL;
+    const API_KEY = process.env.REACT_APP_API_KEY;
+
 
     const [ApiData, SetApiData] = useState([]);
     const [category, SetCategory] = useState('');
@@ -33,7 +36,9 @@ const Home = () => {
 
     useEffect(() => {
         setLoading(true); // Start loading
-        fetch(`https://newsapi.org/v2/everything?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`).
+    const API_URL = process.env.REACT_APP_API_URL;
+        fetch(`${API_URL}?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`).
+        // fetch(`https://newsapi.org/v2/everything?q=${query}&from=${Yesterday}&sortBy=publishedAt&apiKey=${API_KEY}`).
             then((response) => {
                 return response.json();
             }).then((data) => {
@@ -50,8 +55,8 @@ const Home = () => {
                 }
                 setLoading(false); // End loading
             }).catch((error) => {
-        
-                SetApiData([]); 
+
+                SetApiData([]);
                 setLoading(false); // end loading 
             })
     }, [category, searchText]);
