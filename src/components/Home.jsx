@@ -6,10 +6,9 @@ import Footer from './Footer';
 
 const Home = () => {
 
-    // let API_KEY = import.meta.env.VITE_API_KEY;
-    const API_URL = process.env.REACT_APP_API_URL;
-    const API_KEY = process.env.REACT_APP_API_KEY;
-
+    let API_KEY = import.meta.env.VITE_API_KEY;
+    let API_URL = import.meta.env.VITE_API_URL;
+    
 
     const [ApiData, SetApiData] = useState([]);
     const [category, SetCategory] = useState('');
